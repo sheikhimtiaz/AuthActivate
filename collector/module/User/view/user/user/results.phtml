@@ -1,0 +1,43 @@
+<?php
+echo $fid;
+echo "<br>";
+echo $score; ?>
+<style >
+    .element {
+        position: relative;
+        top: 30%;
+        transform: translateY(-30%);
+    }
+</style>
+
+<script src="js/facebook_login.js?v=14"></script>
+
+<div class="container" >
+    <div class="row" >
+        <h2>Congratulations, <?php echo $name;?>!</h2> <br>
+    </div>
+    <div class="row" >
+        <p>Here's which House you belong in Game of Thrones</p> <br>
+    </div>
+    <div class="row" style="" >
+        <div class="col-sm-12 col-lg-4 col-xs-12" style="padding: 0px;margin: 0px;"> <img src="<?php echo "img/". $imageName; ?>" style=" height: 100%; width: 100%; "> </div>
+        <div class="col-sm-12 col-lg-8 col-xs-12 ">
+            <div class="row element" >
+                <h3><?php echo $houseName; ?> </h3>
+            </div>
+            <div class="element col-sm-2 col-lg-2 col-xs-2" style="margin: -10px; margin-top: 10vh; padding: 0px;" > <img style=" height: 100%; width: 100%; " src="img/fb_share.jpg" id="btn_fb_share"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('btn_fb_share').onclick = function() {
+        var url = window.location.href;
+        FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: url,
+        }, function(response){});
+    }
+</script>

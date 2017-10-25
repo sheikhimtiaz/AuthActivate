@@ -1,0 +1,47 @@
+<script src="js/facebook_login.js?v=14"></script>
+
+<!-- Header -->
+<header class="intro-header" id="starter"  >
+    <div class="container"  >
+        <div class="intro-message">
+            <h1>GOT Fan Quizz</h1>
+            <h3>Find out your house in GOT!</h3>
+            <hr class="intro-divider">
+            <ul class="list-inline intro-social-buttons">
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-secondary btn-lg" onclick="fb_login();">
+                        <i class="fa fa-facebook fa-fw"></i>
+                        <span class="network-name">Start With Facebook</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</header>
+
+<div id="puzzle-holder" class="grid row" style="margin: 5vh;display: none; " >
+    <div id="quiz">
+        <h1>Find out your house in GOT</h1>
+        <hr style="margin-bottom: 20px">
+
+        <p style="text-align: center" id="question"></p>
+
+        <div class="buttons">
+            <div class="col-sm-6" style="float: left"> <button id="btn0"><span id="choice0"></span></button></div>
+            <div class="col-sm-6" style="float: right" > <button id="btn1"><span id="choice1"></span></button></div>
+            <div class="col-sm-6" style="float: left"> <button id="btn2"><span id="choice2"></span></button></div>
+            <div class="col-sm-6" style="float: right"> <button id="btn3"><span id="choice3"></span></button></div>
+        </div>
+
+        <hr style="margin-top: 10vh;  clear: left">
+        <div id="question_number" style="text-align: center">
+            <p id="progress">Question x of y</p>
+        </div>
+    </div>
+</div>
+<script src="js/quiz/app.js?v=126"></script>
+
+<link href="css/quiz/style.css?v=8" rel="stylesheet">
+
+

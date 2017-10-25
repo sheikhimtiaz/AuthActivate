@@ -1,0 +1,153 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle("ImStarvin - Admin") ?>
+
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/imstarvinFavicon.ico'))
+        ->prependStylesheet($this->basePath('css/style.css'))
+        ->prependStylesheet($this->basePath('css/dropdown.css'))
+        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+    ?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+        ->appendFile($this->basePath('js/jquery.min.js'))
+        ->appendFile($this->basePath('js/bootstrap.min.js'))
+        ->appendFile($this->basePath('js/dropdown.js'))
+        ->appendFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->appendFile($this->basePath('js/html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+    ; ?>
+
+</head>
+<?php use Zend\Session\Container;
+$container = new Container('Admin\Controller');
+?>
+<body>
+<div class="container">
+
+    <div style="height:1px; background-color: #eee;margin-top:10px; " > </div>
+    <div class="row" >
+        <div class="col-sm-3" style="margin-left: 0;"><img class="img-responsive" style="height:65px;width: 190px;" src="<?php echo  $this->basePath('img/logo_small.png')?>"></div>
+        <?php
+        if($container->loggedIn == true) {
+        ?>
+        <div class="col-sm-9" style="margin: 0;padding: 0;">
+            <div class="row" style="text-align: right;" >
+                <div class="col-sm-6 col-sm-offset-6"  >
+                    <div class="profile_sec">
+                        <img src="<?php echo $this->basePath('img/user_icon.png'); ?>" >
+                        <a href="<?php echo $this->url('admin/logout') ?>" >Logout</a>
+                    </div> </div>
+            </div>
+        </div>
+        <?php } else {?>
+        <div class="col-sm-9" >
+            <div class="row" style="text-align: right;padding-top: 20px;padding-right: 18px;" >
+                <a href="<?php echo $this->url('admin/login') ?>" > Login</a>
+            </div>
+            <?php }  ?>
+        </div>
+    <div class="row" >
+        <?php
+        if($container->loggedIn == true) {
+            ?>
+            <div class="col-sm-12" style="margin: 0;padding: 0;">
+                <div class="row" >
+                    <div class="col-sm-12" >
+                        <div id='cssmenu' >
+                            <ul>
+                                <li><a href='<?php echo $this->url('admin/order') ?>'>Order</a></li>
+                                <li><a href='#'>Restaurant</a>
+                                    <ul>
+                                        <li ><a href='<?php echo $this->url('admin/shop/index') ?>'>Restaurants</a> </li>
+                                        <li ><a href='<?php echo $this->url('admin/shop/inactive') ?>'>Offline Restaurants</a> </li>
+                                        <li ><a href='<?php echo $this->url('admin/shop/sponsored') ?>'>Sponsored Restaurants</a> </li>
+                                        <li class='active has-sub'><a href='#'>Type/Category</a>
+                                            <ul>
+                                                <li><a href='<?php echo $this->url('admin/shop/categorybyshop') ?>'>By Shop Type</a></li>
+                                                <li><a href='<?php echo $this->url('admin/shop/categorybyfood') ?>'>By Food Type</a></li>
+                                            </ul>
+                                        </li>
+                                        <li ><a href='<?php echo $this->url('admin/shop-invoice') ?>'>Restaurant Invoice</a> </li>
+                                        <li ><a href='<?php echo $this->url('admin/reviews') ?>'>Reviews</a> </li>
+                                    </ul>
+                                </li>
+                                <li class="has-sub" > <a href='#'>Customer</a>
+                                    <ul>
+                                        <li><a href='<?php echo $this->url('admin/customer') ?>'>Customers</a></li>
+                                        <li><a href='#'>Subscription</a>
+                                            <ul>
+                                                <li><a href='<?php echo $this->url('admin/subscription') ?>'>Subscriptions</a></li>
+                                                <li><a href='<?php echo $this->url('admin/subscription/newsletter') ?>'>Newsletter</a></li>
+                                                <li><a href='<?php echo $this->url('admin/subscription/template') ?>'>Newsletter Template</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="has-sub" ><a href='<?php echo $this->url('admin/promotion')?>'>Promotion</a>
+                                    <ul>
+                                        <li><a href='<?php echo $this->url('admin/promotion') ?>'>Promotions</a></li>
+                                        <li style="display: none;"><a href='<?php echo $this->url('admin/shop/top') ?>'>Top Restaurants</a></li>
+                                    </ul>
+                                </li>
+                                <li style="" class="has-sub" ><a href='#'>Gift Voucher</a>
+                                    <ul>
+                                        <li><a href='<?php echo $this->url('admin/gift-vouchers') ?>'>Gift Vouchers</a></li>
+                                        <li><a href='<?php echo $this->url('admin/gift-vouchers/settings') ?>'>Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href='#'>Contents</a>
+                                    <ul>
+                                        <li ><a href='<?php echo $this->url('admin/faq')?>'>FAQ</a>
+                                        </li>
+                                        <li ><a href='#'>Blog</a> </li>
+                                        <li ><a href='#'>Others</a> </li>
+                                    </ul>
+                                </li>
+                                <li><a href='#'>Management</a>
+                                    <ul>
+                                        <li style="display: none;"><a href='#'>Admin Users</a> </li>
+                                        <li ><a href='<?php echo $this->url('admin/operator')?>'>Operators</a> </li>
+                                        <li><a href='<?php echo $this->url('admin/location')?>'>Location</a></li>
+                                        <li class="has-sub" ><a href='#' >Drivers</a>
+                                            <ul>
+                                                <li><a href='<?php echo $this->url('admin/driver')?>'>Drivers</a></li>
+                                                <li ><a href='<?php echo $this->url('admin/driver-invoice') ?>'>Driver Invoice</a> </li>
+                                                <li ><a href='<?php echo $this->url('admin/driver/driverreq') ?>'>Driver Request</a> </li>
+                                                <li ><a href='<?php echo $this->url('admin/driver/driverSessionList') ?>'>Driver Session List</a> </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href='<?php echo $this->url('admin/settings')?>'>Settings</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php }  ?>
+
+        </div>
+        <div class="body_content" >
+        <?php echo $this->content; ?>
+
+        </div>
+        <div class="footer" style="margin-top:10px;border-top: 1px solid #DDDDDD" >
+            <div class="row" >
+                <div class="col-sm-6" > </div>
+                <div class="col-sm-6" style="padding-top:2px;" > <p style="text-align: right;padding-top: 10px;font-size: 12px;color: #3c3c3c">&copy; 2015 ImStarvin. <?php echo $this->translate('All Rights Reserved.') ?></p></div>
+            </div>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+</body>
+</html>

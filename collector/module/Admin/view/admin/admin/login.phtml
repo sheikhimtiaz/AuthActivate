@@ -1,0 +1,46 @@
+<?php
+$title = 'Log In';
+$this->headTitle();
+if(isset($data))
+    print_r($data);
+else
+{
+    ?>
+    <div class="row" style="margin-top: 30px;">
+    <span style="font-size: 24px;color: #337AB7;padding-left:38%;"><?php echo $this->escapeHtml($title); ?></span> </div>
+    <div class="row" style="height: 20px;"></div>
+    <?php
+    $url =$this->url('admin/login');
+    $form->setAttribute('action',$url );
+    $form->prepare();
+    echo $this->form()->openTag($form);
+    foreach ($form as $element) :?>
+        <div class="form-group"  style="padding-left: 200px">
+            <?php
+            if ($element->getOption('required')) { $req = 'required'; }
+            $type = $element->getAttribute('type');
+            $name = $element->getAttribute('name');
+            $label = $element->getLabel();
+            $erroMsg = $this->formElementErrors($element);
+            ?>
+            <?php if ($name == 'id') { ?>
+                <div class="hidden"><?php echo $this->formElement($element); ?></div>
+            <?php } else if ($name == 'submit') { ?>
+                <div class="row" >
+                    <div class="col-sm-3" ></div>
+                    <div class=" col-sm-5 "><input class='btn btn-default' style="color: #337AB7;" name='submit' type='submit' value='Login'> </div>
+                </div>
+            <?php } else if ($label != '') { ?>
+                <div class="row">
+                    <div class="col-sm-3" style="text-align: right;" > <label ><?php echo $label ?></label></div>
+                    <div class="col-sm-3"> <input class="form-control" name='<?php echo $name ?>' type='<?php echo $type ?>'> </div>
+                    <div class="col-sm-4"> <?php  echo $erroMsg; ?></div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php
+    endforeach;
+    echo $this->form()->closeTag();
+}
+
+
