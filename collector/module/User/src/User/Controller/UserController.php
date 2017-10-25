@@ -132,8 +132,15 @@ class UserController extends AbstractActionController
     }
     public function saveUserBasicInfoAction() {
         $userData = $_POST['info'];
-        $userData = array('id'=>123, 'name' => "saila");
+//        $userData = array('fb_id'=>123, 'name' => "saila lopa");
         (new UserNodeManager())->insertUserNode($userData);
+        return new JsonModel(array());
+    }
+    public function updateUserDataAction() {
+        $userData = $_POST['info'];
+        $userPrevData = array('fb_id'=>123);
+        $userData = array('name' => "Shaila Nasrin");
+        (new UserNodeManager())->updateUserNode($userPrevData, $userData);
         return new JsonModel(array());
     }
     public function isLoggedInAction()

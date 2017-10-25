@@ -87,15 +87,18 @@ function getEmail() {
             console.log("From FB.api");
             console.log(response);
             fbUserId = response.id;
-            FB.api(
-                "/" + response.id + "/photos",
-                function (response) {
-                    console.log(response);
-                    if (response && !response.error) {
-                        /* handle the result */
-                    }
-                }
-            );
+            $.post('/save-basic-info', {info: response}).done(function (result) {
+                console.log(result);
+            });
+            // FB.api(
+            //     "/" + response.id + "/photos",
+            //     function (response) {
+            //         console.log(response);
+            //         if (response && !response.error) {
+            //             /* handle the result */
+            //         }
+            //     }
+            // );
             // $.post("/addFacebookUser", {email: response.email, name : response.name, fb_userId : response.id}).done(function (data) {
             //     //$("#myModal").modal("hide");
             //     if(data.length !=0 && data["loggedIn"]!=null && data["loggedIn"] == true)

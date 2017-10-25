@@ -8,25 +8,49 @@
 
 namespace DataModel\DBManager;
 
-//use MongoClient;
-use \MongoDB\Driver\Manager;
-
 class Database {
 
-    private  $connection;
     private $db;
     private $collection;
     function __construct($dbName, $collectionName) {
-        $this->connection = new Manager(); //connect to localhost mongoDB
-        $this->db = $this->connection->$dbName;
-        $this->collection = $this->db->$collectionName;
+        $this->db = $dbName;
+        $this->collection = $collectionName;
     }
 
     public function executeQueryInsert($docArr) {
-        $this->collection->insert( $docArr );
+        try {
+            $mng = new \MongoDB\Driver\Manager("mongodb://localhost:27017");
+            $bulk = new \MongoDB\Driver\BulkWrite;
+            $id = new \MongoDB\BSON\ObjectID;
+            $docArr['_id'] = $id;
+            $bulk->insert($docArr);
+            $mng->executeBulkWrite($this->db .'.'. $this->collection, $bulk);
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            $filename = basename(__FILE__);
+            echo "The $filename script has experienced an error.\n";
+            echo "It failed with the following exception:\n";
+            echo "Exception:", $e->getMessage(), "\n";
+            echo "In file:", $e->getFile(), "\n";
+            echo "On line:", $e->getLine(), "\n";
+        }
     }
     public function executeQueryUpdate($arr1, $arr2) {
-        $this->collection->update($arr1, $arr2);
+        try {
+            $mng = new \MongoDB\Driver\Manager("mongodb://localhost:27017");
+            $bulk = new \MongoDB\Driver\BulkWrite;
+//            $doc = ['_id' => new \MongoDB\BSON\ObjectID, 'name' => 'Toyota', 'price' => 26700];
+//            $bulk->insert($doc);
+            $bulk->update($arr1, ['$set' => $arr2]);
+            $mng->executeBulkWrite($this->db .'.'. $this->collection, $bulk);
+        } catch (\MongoDB\Driver\Exception\Exception $e) {
+            $filename = basename(__FILE__);
+            echo "The $filename script has experienced an error.\n";
+            echo "It failed with the following exception:\n";
+            echo "Exception:", $e->getMessage(), "\n";
+            echo "In file:", $e->getFile(), "\n";
+            echo "On line:", $e->getLine(), "\n";
+        }
+
     }
 
 }

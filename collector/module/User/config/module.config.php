@@ -47,6 +47,15 @@ return array(
                             ),
                         ),
                     ),
+                    'update-user-data' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => 'update-user-data',
+                            'defaults' => array(
+                                'action' => 'updateUserData',
+                            ),
+                        ),
+                    ),
                     'results' => array(
                         'type' => 'Literal',
                         'options' => array(
