@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>GOT HOUSE QUIZZ</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/facebook_login.js?v=101"></script>
+    <script src="js/quiz/app.js?v=101"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="intro-header" id="starter"  >
+        <div class="container"  >
+            <div class="intro-message">
+                <h1>GOT HOUSE QUIZZ</h1>
+                <h3>Find out your house in GOT!</h3>
+                <hr class="intro-divider">
+                <ul class="list-inline intro-social-buttons">
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-secondary btn-lg" onclick="fb_login();">
+                            <i class="fa fa-facebook fa-fw"></i>
+                            <span class="network-name">Start With Facebook</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+
+    <div id="puzzle-holder" class="grid row" style="margin: 5vh;display: none; " >
+        <div id="quiz">
+            <h1>Find out your house in GOT</h1>
+            <hr style="margin-bottom: 20px">
+
+            <p style="text-align: center" id="question"></p>
+
+            <div class="buttons">
+                <div class="col-sm-6" style="float: left"> <button id="btn0"><span id="choice0"></span></button></div>
+                <div class="col-sm-6" style="float: right" > <button id="btn1"><span id="choice1"></span></button></div>
+                <div class="col-sm-6" style="float: left"> <button id="btn2"><span id="choice2"></span></button></div>
+                <div class="col-sm-6" style="float: right"> <button id="btn3"><span id="choice3"></span></button></div>
+            </div>
+
+            <hr style="margin-top: 10vh;  clear: left">
+            <div id="question_number" style="text-align: center">
+                <p id="progress">Question x of y</p>
+            </div>
+        </div>
+    </div>
+    <script src="js/quiz/app.js?v=126"></script>
+
+    <link href="css/quiz/style.css?v=8" rel="stylesheet">
+</body>
+
+</html>

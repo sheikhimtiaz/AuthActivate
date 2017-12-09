@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>GOT HOUSE QUIZZ</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/facebook_login.js?v=101"></script>
+</head>
+
+<body>
+
+    <style >
+        .element {
+            position: relative;
+            top: 30%;
+            transform: translateY(-30%);
+        }
+    </style>
+
+    <script src="js/facebook_login.js?v=14"></script>
+
+    <div class="container" >
+        <div class="row" >
+            <h2>Congratulations,<span id="fb_name">  </span></h2> <br>
+        </div>
+        <div class="row" >
+            <p>Here's which House you belong in Game of Thrones</p> <br>
+        </div>
+        <div class="row" style="" >
+            <div class="col-sm-12 col-lg-4 col-xs-12" style="padding: 0px;margin: 0px;"> <img id="house_image" src="" style=" height: 100%; width: 100%; "> </div>
+            <div class="col-sm-12 col-lg-8 col-xs-12 ">
+                <div class="row element" >
+                    <h3 id="house_name"></h3>
+                </div>
+                <div class="element col-sm-2 col-lg-2 col-xs-2" style="margin: -10px; margin-top: 10vh; padding: 0px;" > <img style=" height: 100%; width: 100%; " src="img/fb_share.jpg" id="btn_fb_share"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $( document ).ready(function() {
+//            alert("Window loaded");
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var house = url.searchParams.get("house");
+            var fu = url.searchParams.get("fu");
+            var fName = url.searchParams.get("fn");
+            var ImageName = url.searchParams.get("image");
+
+            var nameEl = document.getElementById("fb_name");
+            var houseNameEl = document.getElementById("house_name");
+            var imageEl = document.getElementById("house_image");
+            if(imageEl!=null && houseNameEl!=null && nameEl!=null) {
+                nameEl.innerHTML = fName ;
+                imageEl.src = "/img/" + ImageName;
+                houseNameEl.innerHTML = house;
+            }
+        });
+        document.getElementById('btn_fb_share').onclick = function() {
+            var url = window.location.href;
+            FB.ui({
+                method: 'share',
+                display: 'popup',
+                href: url,
+            }, function(response){});
+        }
+    </script>
+</body>
+</html>
