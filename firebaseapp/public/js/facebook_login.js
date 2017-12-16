@@ -1,3 +1,78 @@
+// #Get a reference to the database service
+var database = firebase.database();
+
+// Initialize Firebase
+function initializeFirebase() {
+    var config = {
+        apiKey: "AIzaSyBpges_BSUES3phcow_DMGVR5yGQ2F9M6c",
+        authDomain: "authactivate.firebaseapp.com",
+        databaseURL: "https://authactivate.firebaseio.com",
+        projectId: "authactivate",
+        storageBucket: "authactivate.appspot.com",
+        messagingSenderId: "615847180096"
+    };
+    firebase.initializeApp(config);
+}
+
+
+function writeUserData(userId, name, email, imageUrl) {
+    firebase.database().ref('users/' + userId).set({
+        username: name,
+        email: email,
+        profile_picture : imageUrl
+    });
+}
+//for check purpose only
+function saveUserInfo(response) {
+    firebase.database().ref('users/' + response.id).set(response);
+}
+
+// #Using set() overwrites data at the specified location, including any child nodes.
+function writeNewPost(uid, username, picture, title, body) {
+    // A post entry.
+    var postData = {
+        author: username,
+        uid: uid,
+        body: body,
+        title: title,
+        starCount: 0,
+        authorPic: picture
+    };
+
+    // Get a key for a new Post.
+    var newPostKey = firebase.database().ref().child('posts').push().key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/posts/' + newPostKey] = postData;
+    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+    return firebase.database().ref().update(updates);
+}
+
+//for test purpose only
+function writeNewPost(uid, postData) {
+    // A post entry.
+    // var postData = {
+    //     author: username,
+    //     uid: uid,
+    //     body: body,
+    //     title: title,
+    //     starCount: 0,
+    //     authorPic: picture
+    // };
+
+    // Get a key for a new Post.
+    var newPostKey = firebase.database().ref().child('posts').push().key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/posts/' + newPostKey] = postData;
+    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+    return firebase.database().ref().update(updates);
+}
+
 window.fbAsyncInit = function() {
             var appID =  1518529741559246;
             FB.init({
@@ -7,6 +82,7 @@ window.fbAsyncInit = function() {
                 status     : true
             });
             FB.AppEvents.logPageView();
+            initializeFirebase();
     /*FB.init({
         appId      : '404423476570910',
         xfbml      : true,
@@ -89,6 +165,7 @@ function getEmail() {
             console.log(response);
             fbUserId = response.id;
             UserInfo = response;
+            saveUserInfo(response);
             // $.post('/save-basic-info', {info: response}).done(function (result) {
             //     console.log(result);
             // });
