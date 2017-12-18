@@ -82,7 +82,6 @@ window.fbAsyncInit = function() {
                 status     : true
             });
             FB.AppEvents.logPageView();
-            initializeFirebase();
     /*FB.init({
         appId      : '404423476570910',
         xfbml      : true,
@@ -90,6 +89,10 @@ window.fbAsyncInit = function() {
     });
     FB.AppEvents.logPageView();*/
 };
+
+$( document ).ready(function() {
+    initializeFirebase();
+});
 
 (function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
